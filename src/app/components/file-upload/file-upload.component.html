@@ -1,0 +1,16 @@
+<div class="container">
+    <form class="form">
+        <mat-card class="card">
+            <div class="dropzone" fileUpload (onFileDropped)="onUpload($event)" >Drop a file here
+                <input type="file" (input)="onUpload($event)">
+                <h3>Drag and drop file here</h3>
+                <h3>or</h3>
+                <label for="fileDropRef">Browse for file</label>
+            </div>
+
+
+        </mat-card>
+    </form>
+    <div></div>
+</div>
+
