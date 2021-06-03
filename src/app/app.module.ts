@@ -12,13 +12,17 @@ import { MaterialModule } from './shared/material.module';
 
 import { FileUploadComponent } from './components/file-upload/file-upload.component';
 import { UploadDirective } from './directives/upload.directive';
+import { TileComponent } from './components/tile/tile.component';
+import { HomeComponent } from './components/home/home.component';
 
 
 @NgModule({
   declarations: [
     AppComponent,
     FileUploadComponent,
-    UploadDirective
+    UploadDirective,
+    TileComponent,
+    HomeComponent,
   ],
   imports: [
     BrowserModule,

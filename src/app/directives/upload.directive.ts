@@ -1,6 +1,6 @@
 import { 
   Directive, Output, EventEmitter, 
-  HostBindingDecorator, HostListener, HostBinding 
+  HostListener, HostBinding 
 }
 from '@angular/core';
 
@@ -9,35 +9,38 @@ from '@angular/core';
 })
 export class UploadDirective {
   @Output() onFileDropped = new EventEmitter<any>();
+  @HostBinding('class.fileover') fileOver = false;
   @HostBinding('style.background-color') public background = '#fff';
   @HostBinding('style.opacity') public opacity = '1';
   constructor() { }
-  // Mouse over listener, when something is dragged over our host element
-  @HostListener('mouseover', ['$event']) onMouseOver(e: any) {
+  
+  // Dragover listener
+  @HostListener('dragover', ['$event']) onDragOver(e:any) {
     e.preventDefault();
     e.stopPropagation();
-    this.background = '#9ecbec';
-    this.opacity = '0.8'
+    this.fileOver = true;
   }
 
-  @HostListener('drop', ['$event']) public onDrop(e: any) {
+   // Dragleave listener
+   @HostListener('dragleave', ['$event']) public onDragLeave(e:any) {
     e.preventDefault();
     e.stopPropagation();
+    this.fileOver = false;
+  }
+
+  // Drop listener
+  @HostListener('drop', ['$event']) public ondrop(e:any) {
+    e.preventDefault();
+    e.stopPropagation();
+
     this.background = '#f5fcff'
     this.opacity = '1'
+    
+    this.fileOver = false;
     let files = e.dataTransfer.files;
     if (files.length > 0) {
       this.onFileDropped.emit(files);
-      console.log(`You dropped ${files.length} files`)
     }
-  }
-
-  //Drave leave listener, when something is dragged away from our host element
-  @HostListener('mouseleave', ['$event']) public onDragLeave(e: any) {
-    e.preventDefault();
-    e.stopPropagation();
-    this.background = '#fff'
-    this.opacity = '1'
   }
 
 }
