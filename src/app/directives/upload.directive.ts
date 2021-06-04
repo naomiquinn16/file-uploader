@@ -5,7 +5,7 @@ import {
 from '@angular/core';
 
 @Directive({
-  selector: '[fileUpload]'
+  selector: '[fileDrop]'
 })
 export class UploadDirective {
   @Output() onFileDropped = new EventEmitter<any>();
