@@ -7,7 +7,7 @@ import {
 } from 'src/app/services/mock-data';
 import { HttpClient } from '@angular/common/http';
 
-import { ImgbbService } from '../../services/imgbb.service';
+import { UploadService } from '../../services/upload.service';
 
 import { FileUploadComponent } from './file-upload.component';
 import { throwError } from 'rxjs';
@@ -22,7 +22,6 @@ describe('FileUploadComponent', () => {
       providers: [
         { provide: MatSnackBar, useClass: MockMatSnackBar },
         { provide: HttpClient, useClass: MockHttpClient },
-        //{ provide: ImgbbService, useClass: MockImgbbService },
       ],
     }).compileComponents();
   });
@@ -88,7 +87,7 @@ describe('FileUploadComponent', () => {
   });
 
   it('should successfully upload the file', () => {
-    const _imgbbService = TestBed.inject(ImgbbService);
+    const _uploadService = TestBed.inject(UploadService);
     const file = {
       name: 'image',
       lastModified: '040621',
@@ -97,7 +96,7 @@ describe('FileUploadComponent', () => {
       progress: 0,
       webkitRelativePath: '',
     };
-    const uploadSpy = spyOn(_imgbbService, 'uploadFile').and.callThrough();
+    const uploadSpy = spyOn(_uploadService, 'uploadFile').and.callThrough();
     const toastSpy = spyOn(component, 'showToastMessage');
 
     component.uploadFile(file);
@@ -107,8 +106,8 @@ describe('FileUploadComponent', () => {
   });
 
   it('should NOT successfully upload the file', () => {
-    const _imgbbService = TestBed.inject(ImgbbService);
-    const uploadSpy = spyOn(_imgbbService, 'uploadFile').and.returnValue(
+    const _uploadService = TestBed.inject(UploadService);
+    const uploadSpy = spyOn(_uploadService, 'uploadFile').and.returnValue(
       throwError(new Error('something'))
     );
     const toastSpy = spyOn(component, 'showToastMessage');

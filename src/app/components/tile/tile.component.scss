@@ -1,8 +1,8 @@
+@import '../../shared/mixins.scss';
+@import '../../shared/variables.scss';
 .tile {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    border: 1px solid lightgray;
+    @include flex;
+    border: 1px solid $light-grey;
     border-radius: 10px;
     padding: 2rem;
     box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2);

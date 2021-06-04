@@ -12,6 +12,7 @@ export class UploadDirective {
   @HostBinding('class.fileover') fileOver = false;
   @HostBinding('style.background-color') public background = '#fff';
   @HostBinding('style.opacity') public opacity = '1';
+  @HostBinding('style.border') public border = '1px dashed #D3D3D3';
   constructor() { }
   
   // Dragover listener
@@ -19,6 +20,7 @@ export class UploadDirective {
     e.preventDefault();
     e.stopPropagation();
     this.fileOver = true;
+    this.background = '#EEFBFB'
   }
 
    // Dragleave listener
@@ -26,6 +28,8 @@ export class UploadDirective {
     e.preventDefault();
     e.stopPropagation();
     this.fileOver = false;
+    this.background = '#FFF';
+    this.border = '1px dashed #D3D3D3';
   }
 
   // Drop listener
@@ -33,9 +37,9 @@ export class UploadDirective {
     e.preventDefault();
     e.stopPropagation();
 
-    this.background = '#f5fcff'
-    this.opacity = '1'
-    
+    this.background = '#EEFBFB'
+    this.border = '1px solid #44C4A1';
+    this.opacity = '1';    
     this.fileOver = false;
     let files = e.dataTransfer.files;
     if (files.length > 0) {

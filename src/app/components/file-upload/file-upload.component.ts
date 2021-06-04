@@ -1,7 +1,7 @@
 import { animate, style, transition, trigger } from '@angular/animations';
 import { Component, OnInit } from '@angular/core';
 import { MatSnackBar, MatSnackBarConfig } from '@angular/material/snack-bar';
-import { ImgbbService } from 'src/app/services/imgbb.service';
+import { UploadService } from 'src/app/services/upload.service';
 @Component({
   selector: 'app-file-upload',
   templateUrl: './file-upload.component.html',
@@ -40,7 +40,7 @@ export class FileUploadComponent implements OnInit {
 
   constructor(
     private _snackBar: MatSnackBar,
-    private readonly _imgbbService: ImgbbService
+    private readonly _uploadService: UploadService
   ) {}
 
   ngOnInit(): void {
@@ -65,17 +65,19 @@ export class FileUploadComponent implements OnInit {
 
   uploadFile(file: any) {
     file.progress = 0;
-    this._imgbbService.uploadFile(file).subscribe(response => {
-      console.log(response)
-      if (response.success) {
+    this._uploadService.uploadFile(file).subscribe(response => {
+      if (response.status === 200) {
         file.progress = 100;
+        file.color = 'primary'
         this.showToastMessage(this.successMessage);
-      } else {
+      } else if (response.status === 500) {
         this.showToastMessage(this.errorMessage);
         file.progress = 15;
+        file.color = 'accent'
       }
     }, (error) => {
       file.progress = 15;
+      file.color = 'warn'
       this.showToastMessage(this.errorMessage);
     });
   }

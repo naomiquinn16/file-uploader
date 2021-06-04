@@ -1,31 +1,30 @@
+@import "../../shared/variables.scss";
+@import "../../shared/mixins.scss";
+
 .container {
   display: flex;
   width: 100%;
   height: 100%;
   justify-content: center;
   .card {
-    display: flex;
+    @include flex;
     flex-direction: column;
-    justify-content: center;
-    align-items: center;
     .dropzone {
-      display: flex;
-      justify-content: center;
-      align-items: center;
+      @include flex;
       flex-direction: column;
       width: 300px;
       margin: 0 auto;
-      border: 1px dashed lightgray;
+      border: 1px dashed $light-grey;
       border-radius: 10px;
       padding: 2rem;
       #upload {
-        display:none
+        display: none;
       }
       h2 {
         margin: 1rem 0;
       }
       .button {
-        color: grey;
+        color: $dark-grey;
         &:hover {
           cursor: pointer;
         }
@@ -35,7 +34,7 @@
       width: 100%;
       flex-direction: column;
       .file-container {
-        border: 1px solid lightgray;
+        border: 1px solid $light-grey;
         border-radius: 10px 10px 0 0;
       }
       .file {
@@ -44,16 +43,38 @@
         .mat-list-item-content {
           width: 100% !important;
         }
+        .icon {
+          color: $dark-grey;
+        }
       }
     }
   }
 }
 
 .fileover {
-  animation: shake 1s;
-  animation-iteration-count: infinite;
+  animation: ripple 1.5s;
+  animation-iteration-count: 1;
+}
+
+@keyframes ripple {
+  0% {
+    background-color: #fff;
+  }
+  100% {
+    background-color: #eefbfb;
+  }
 }
 
 ::ng-deep .mat-list-item-content {
   width: 100% !important;
+}
+
+@media only screen and (max-width: 600px) {
+  .container {
+    .card {
+      .dropzone {
+        width: auto;
+      }
+    }
+  }
 }

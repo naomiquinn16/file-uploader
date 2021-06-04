@@ -1,22 +1,22 @@
 import { TestBed } from '@angular/core/testing';
 import { HttpClient } from '@angular/common/http';
 
-import { ImgbbService } from './imgbb.service';
+import { UploadService } from './upload.service';
 import { MockHttpClient, mockResponse } from './mock-data';
 import { of } from 'rxjs';
 
-describe('ImgbbService', () => {
-  let service: ImgbbService;
+describe('UploadService', () => {
+  let service: UploadService;
 
   beforeEach(() => {
     TestBed.configureTestingModule({
       providers: [
-        ImgbbService,
+        UploadService,
           { provide: HttpClient, useClass: MockHttpClient },
       ]
     });
 
-    service = TestBed.inject(ImgbbService);
+    service = TestBed.inject(UploadService);
   });
 
   it('should be created', () => {
