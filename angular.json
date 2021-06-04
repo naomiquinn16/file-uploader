@@ -84,6 +84,9 @@
             },
             "development": {
               "browserTarget": "file-upload:build:development"
+            },
+            "localhost": {
+              "browserTarget": "file-upload:build:development"
             }
           },
           "defaultConfiguration": "development"

@@ -1,12 +1,13 @@
 
   <div class="container">
-    <div class="card">
-      <div class="dropzone" fileDrop (onFileDropped)="onFileDropped($event)">
+    <form class="card" [formGroup]="form">
+      <div class="dropzone" fileDrop (onFileDropped)="onFileDropped($event)" for="upload">
         <img width="40"src="/assets/images/folder.svg" alt="File Upload Image">
         <h2>Drag and drop here</h2>
         <h3>or</h3>
-        <input id="upload" #upload type="file" (input)="onFileUploaded($event)">
+        <input [writeFile]="true" formControlName="imageInput" id="upload" #upload type="file" name="file" (change)="onFileUploaded($event)">
         <label for="upload" class="button">Browse for file</label>
+        <mat-error *ngIf="form.controls.imageInput.errors">File not accepted </mat-error>
       </div>
       <mat-list class="list">
         <div @items class="file-container" *ngFor="let file of files; let i = index">
@@ -29,7 +30,7 @@
         </div>
 
       </mat-list>
-    </div>
+    </form>
 </div>
 
 
