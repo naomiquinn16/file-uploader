@@ -2,8 +2,8 @@ import { animate, style, transition, trigger } from '@angular/animations';
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { MatSnackBar, MatSnackBarConfig } from '@angular/material/snack-bar';
+import { fileExtensionValidator } from 'src/app/directives/file-validation.directive';
 import { UploadService } from 'src/app/services/upload.service';
-import { RxwebValidators } from '@rxweb/reactive-form-validators';
 @Component({
   selector: 'app-file-upload',
   templateUrl: './file-upload.component.html',
@@ -27,7 +27,7 @@ import { RxwebValidators } from '@rxweb/reactive-form-validators';
   ]
 })
 
-export class FileUploadComponent implements OnInit {
+export class FileUploadComponent  {
   files: any = [];
   form: FormGroup;
   configSnackBar: MatSnackBarConfig<any> = {
@@ -46,16 +46,10 @@ export class FileUploadComponent implements OnInit {
     private readonly _uploadService: UploadService
   ) {
     this.form = this._formBuilder.group({
-      imageInput: ['', [
-        RxwebValidators.image({maxHeight:100,maxWidth:100 }),
-        RxwebValidators.extension({extensions:['jpeg','gif', 'tif', 'tiff', 'png', 'svg', 'jfif']})
-        ]
+        imageInput: ['jpeg', [Validators.required, fileExtensionValidator(
+          'jpeg, gif, tif, tiff, png, svg, jfif')]
       ]
     });
-  }
-
-  ngOnInit(): void {
-
   }
 
   onFileUploaded(event: any) {
@@ -74,7 +68,6 @@ export class FileUploadComponent implements OnInit {
             file.progress = 0;
             this.files.unshift(file);
             this.uploadFile(file);
-            this.form.controls['imageInput'].setValue('');
       }
     }
   }

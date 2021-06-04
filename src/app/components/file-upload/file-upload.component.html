@@ -1,11 +1,11 @@
 
   <div class="container">
     <form class="card" [formGroup]="form">
-      <div class="dropzone" fileDrop (onFileDropped)="onFileDropped($event)" for="upload">
+      <div class="dropzone" fileDrop (onFileDropped)="onFileDropped($event)">
         <img width="40"src="/assets/images/folder.svg" alt="File Upload Image">
         <h2>Drag and drop here</h2>
         <h3>or</h3>
-        <input [writeFile]="true" formControlName="imageInput" id="upload" #upload type="file" name="file" (change)="onFileUploaded($event)">
+        <input formControlName="imageInput" id="upload" #upload type="file" name="file" (change)="onFileUploaded($event)">
         <label for="upload" class="button">Browse for file</label>
         <mat-error *ngIf="form.controls.imageInput.errors">File not accepted </mat-error>
       </div>
