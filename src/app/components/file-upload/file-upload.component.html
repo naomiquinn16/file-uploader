@@ -13,17 +13,17 @@
         <div @items class="file-container" *ngFor="let file of files; let i = index">
           <mat-list-item class="file">
             <mat-icon class="material-icons-outlined icon" mat-list-icon>file_present_outline</mat-icon>
-            <div mat-line>{{ file.name }}</div>
+            <div aria-label="File present icon" mat-line>{{ file.name }}</div>
             <div mat-line>{{ file.lastModified | date }}</div>
-            <mat-icon *ngIf="file?.progress === 100" class="icon">check_circle_outline</mat-icon>
-            <mat-icon *ngIf="file?.progress === 15" class="icon" matTooltip="Remove this upload attempt and try again">warning_amber 
+            <mat-icon aria-label="File uploaded icon" *ngIf="file?.progress === 100" class="icon">check_circle_outline</mat-icon>
+            <mat-icon aria-label="Warn failed upload icon" *ngIf="file?.progress === 15" class="icon" matTooltip="Remove this upload attempt and try again">warning_amber 
             </mat-icon>
             <button
               mat-icon-button
               (click)="deleteFile(i)"
               aria-label="Delete button"
             >
-            <mat-icon class="icon">delete_outline</mat-icon>
+            <mat-icon role="presentation" class="icon">delete_outline</mat-icon>
             </button>
           </mat-list-item>
           <mat-progress-bar [value]="file?.progress" [color]="file?.color"></mat-progress-bar>
