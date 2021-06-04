@@ -18,11 +18,26 @@
       border: 1px dashed lightgray;
       border-radius: 10px;
       padding: 2rem;
- 
+      #upload {
+        display:none
+      }
+      h2 {
+        margin: 1rem 0;
+      }
+      .button {
+        color: grey;
+        &:hover {
+          cursor: pointer;
+        }
+      }
     }
     .list {
       width: 100%;
       flex-direction: column;
+      .file-container {
+        border: 1px solid lightgray;
+        border-radius: 10px 10px 0 0;
+      }
       .file {
         display: flex;
         flex-direction: row;

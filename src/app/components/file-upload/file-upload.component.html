@@ -1,32 +1,32 @@
 
   <div class="container">
     <div class="card">
-      <div class="dropzone" fileUpload (onFileDropped)="onFileDropped($event)">
+      <div class="dropzone" fileDrop (onFileDropped)="onFileDropped($event)">
         <img width="40" src="/assets/images/folder.svg">
         <h2>Drag and drop here</h2>
         <h3>or</h3>
-        <input type="file" (input)="onFileUploaded($event)">
+        <input id="upload" #upload type="file" (input)="onFileUploaded($event)">
+        <label for="upload" class="button">Browse for file</label>
       </div>
       <mat-list class="list">
-        <div *ngFor="let file of files; let i = index">
-          <mat-list-item class="file">
-            <mat-icon color="primary" mat-list-icon>folder</mat-icon>
+        <div @items class="file-container" *ngFor="let file of files; let i = index">
+          <mat-list-item  class="file">
+            <mat-icon class="material-icons-outlined" color="primary" mat-list-icon>file_present_outline</mat-icon>
             <div mat-line>{{ file.name }}</div>
             <div mat-line>{{ file.lastModified | date }}</div>
             <mat-icon *ngIf="file?.progress === 100" color="primary">check_circle_outline</mat-icon>
             <button
-              *ngIf="file?.progress === 100"
               mat-icon-button
               (click)="deleteFile(i)"
               color="primary"
               aria-label="Delete button"
             >
-              <mat-icon>delete</mat-icon>
+              <mat-icon>delete_outline</mat-icon>
             </button>
           </mat-list-item>
           <mat-progress-bar [value]="file?.progress"></mat-progress-bar>
         </div>
-        <mat-divider></mat-divider>
+
       </mat-list>
     </div>
 </div>
