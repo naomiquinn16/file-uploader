@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { UploadResponseModel } from '../models/upload-response-model';
-import { config } from '../../environments/environment.prod'
+import { config } from '../../environments/environment.localhost'
 @Injectable({
   providedIn: 'root'
 })
